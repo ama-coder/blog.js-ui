@@ -16,12 +16,23 @@ var getData = (path,json = true) => {
 }
 var getPostsInfo = (path) => {
 
-    var data = getData(path);
+    let data = getData(path);
+    var reg = {};
+    for (let i=0;i<Object.keys(data).length;i++) {
 
-    var info = {
+        if(Object.keys(data)[i][0] == "$") {
+
+            reg [Object.keys(data)[i]] = data[Object.keys(data)[i]];
+            delete data[Object.keys(data)[i]];   
+
+        }
+        
+    } 
+    let info = {
 
         'count' :Object.keys(data).length,
-        'posts' : data
+        'posts' : data,
+        'reg' : reg 
 
     };
     return info;
