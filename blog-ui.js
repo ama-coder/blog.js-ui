@@ -30,9 +30,30 @@ var setpostinfo = () => {
     }
     
 }
+var setposts = () => {
+
+    let link_elements = document.getElementsByTagName("link");
+    let name;
+    for(var i = 0 ; i < link_elements.length; i++)
+    {
+        var att = link_elements[i].getAttribute("rel");
+        if(att == "post") {
+            
+            name = link_elements[i].getAttribute("post-name");
+            break;
+        }
+    }
+    let info = JSON.parse(localStorage.getItem("posts_info"));
+    let post = getPost(name,info);
+    post.content.generated = genContent(post);
+    sessionStorage.setItem(name+"_post",JSON.stringify(post));
+}
+
+
 
 //main app body
 setpostinfo();
+setposts();
 
 
   
