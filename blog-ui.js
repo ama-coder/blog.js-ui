@@ -2,6 +2,21 @@
 //copyright: AmACoder
 
 //funcs
+var getAttribute = (tag_name,att_name) => {
+
+    let tag_col = document.getElementsByTagName(tag_name);
+    for (let i = 0;i<tag_col.length;i++) {
+
+            if (tag_col[i].getAttribute(att_name) != null && tag_col[i].getAttribute(att_name) != "") {
+
+                return tag_col[i].getAttribute(att_name);
+
+            }
+
+    }
+
+}
+
 var set_post_info = () => {
 
     let link_elements = document.getElementsByTagName("link");
@@ -56,15 +71,18 @@ var update_elemnts = () => {
 
             }
         }
-var update = (postname) => {
+var update = (postname,redirect = true,redirect_URL) => {
+
 
     let elms = document.getElementsByClassName("blog.js-ui-element");
     for(let i = 0;i<elms.length;i++) 
         elms[i].setAttribute("post-name",postname)
     set_post(postname);
     update_elemnts();
+    if (redirect == true)
+    window.history.pushState(null,null,redirect_URL)
 
+    return
 }
 //main app body
 set_post_info();
-  
